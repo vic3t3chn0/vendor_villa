@@ -1,0 +1,104 @@
+	Pseudo Buildbot
+
+Pseudo is more than the pseudo build bot she started off as, but she likes the
+name she was given at birth, so celebrate her.
+
+WHAT IS PSEUDO?
+
+    Pseudo is a series of scripts meant to automate an Android build for every
+    device your vendor supports. Pseudo supports uploading to remote servers
+    as well!
+
+DEPENDENCIES
+
+    Pseudo is dependent upon a few, very vital things. The primary being that
+    Your Android build environment is maintained in the standard (recommended
+    by Google) way. Meaning you have a vendor repo with all of your custom
+    build/packaging scripts, overrides, etc... Pseudo will live as a sub-
+    project in your vendor repo (don't forget to add it to your vendors
+    .gitignore).
+
+    Additionally, by default, Pseudo relies on you to be using the CyanogenMod
+    team squisher (found here
+      https://github.com/CyanogenMod/android_vendor_cm/blob/ics/tools/squisher)
+    and the ability to 'make bacon'. However, if you do not build using this
+    system, or prefer making fastboot images (etc), the scripts can be easily
+    modified to accommodate you.
+
+    Other than that, Pseudo *should* be vendor and build independent, to the
+    extent of being able to work with major manufacturers build trees.
+
+CONFIGURING PSEUDO
+
+    All you have to do to configure Pseudo to work with your vendor is to add
+    it to your manifest to be cloned to vendor/YOUR_VENDOR/bot/. That's it!
+    Additionally, if you want Pseudo to upload your builds to a remote server
+    you must create a file named upload in Pseudo's directory and make it
+    executable. Any bash script will work for it. I have left a (bad) example
+    as upload_example for ideas. Everything else is completely automated,
+    unlike other build bots where you have to configure what devices to build,
+    set different calls (or even individual build scripts per device!).
+    Pseudo uses all the information already available in the Android build
+    environment!
+
+    Pseudo does have some options you can call during execution they are as
+    follows
+    -c = Remove your out/ to create a clean build enviornment for you to
+         start off the main build with.
+    -o = Essential what this does is tell Pseudo to use a different vendor's
+         vendorsetup.sh, but not break the build automation of Pseudo. This
+         will most commonly be use for themers who build their themes from
+         source overlays.
+
+         EXAMPLE: ./vendor/aokp/bot/deploy.sh -c -o unicorns
+           will rm -rf out/ before the build, and use the vendorsetup found
+           in vendor/unicorns/vendorsetup.sh instead of vendor/aokp.
+
+SO YOU WANT TO USE PSEUDO?
+
+    Great! That's what she's here for! I do ask though, if you find any ways of
+    making her better, shoot a pull request our way.
+
+WHAT IS DENSE CHANGELOG?
+
+    DenseChangelog is a command line java applet that parses git log --pretty
+    outputs into useful json output. This format is good for communicating
+    data to devices, to be parsed into a useful organization changelog
+
+    REQUIREMENTS: to produce JSON formatted changelog you must ensure
+      pseudo_buildbot directory is present in $PATH; java/javac must be
+      propperly installed and the included json-org.jar from
+      http://www.json.org/ is expected in the same directory as
+      ParseDenseChangelog.java
+
+    EXAMPLE: to generate JSON changelog just execute denseChangelog.sh from $TOP
+      denseChangelog.sh -v -f /path/to/output.json -d MM/dd/yyyy
+      *** all flags are optional ***
+      *** only use -d flag if custom begining date is required; probably better
+          to let the script find the update date itself, its good at that ***
+      *** -v (Verbose) flag executes 'set -x' ***
+      *** default outputs to $TOP/dense_denseChangelog_MM-dd-yyyy.json ***
+
+PSEUDOS FUTURE
+
+    -Add an if override for the .build_target file so user doesn't have to
+    build everything if they don't want to.
+
+    -More debugging options (exit if anything in the builds fail, etc.).
+
+    -Add a nightly/RC/stable toggle for the builds.
+
+    -DenseChangelog is java; java code can always get better.
+
+    -And more!
+
+AUTHORS OF PSEUDO
+
+    Romanbb (https://github.com/romanbb)
+    -Original Author and Unicorn wrangler.
+
+    KhasMek (http://github.com/KhasMek)
+    -Kanger of original script and maker of moar betterer.
+
+    JBirdVegas (http://github.com/JBirdVegas)
+    -Java/JSON junkie and master Unicorn slayer

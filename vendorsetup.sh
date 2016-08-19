@@ -1,0 +1,12 @@
+add_lunch_combo villa_shamu-userdebug
+add_lunch_combo villa_hammerhead-userdebug
+add_lunch_combo villa_mako-userdebug
+add_lunch_combo villa_grouper-userdebug
+add_lunch_combo villa_amami-userdebug
+add_lunch_combo villa_find7-userdebug
+add_lunch_combo villa_find7s-userdebug
+add_lunch_combo villa_honami-userdebug
+add_lunch_combo villa_jfltevzw-userdebug
+add_lunch_combo villa_sirius-userdebug
+add_lunch_combo villa_yuga-userdebug
+add_lunch_combo villa_togari-userdebug
